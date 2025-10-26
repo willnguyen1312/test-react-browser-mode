@@ -12,7 +12,7 @@ describe("App Component", () => {
       // Wait for 250ms to simulate network delay
       await new Promise((resolve) => setTimeout(resolve, 250));
       return Promise.resolve({
-        json: () => Promise.resolve({ id: 999 }),
+        json: () => Promise.resolve({ id: 1000 }),
       });
     });
   });
@@ -26,6 +26,9 @@ describe("App Component", () => {
     // Arrange
     await render(<App />);
 
+    console.log("Initial Render:");
+    console.log(document.body.outerHTML);
+
     // Assert
     await expect
       .element(page.getByRole("heading", { name: "number: 0" }))
@@ -33,7 +36,7 @@ describe("App Component", () => {
 
     // Act
     await userEvent.click(
-      page.getByRole("button", { name: "Randomize number" }),
+      page.getByRole("button", { name: "Randomize number" })
     );
     // Assert
     await expect
@@ -41,7 +44,12 @@ describe("App Component", () => {
       .toBeDisabled();
     await vi.runAllTimersAsync();
     await expect
-      .element(page.getByRole("heading", { name: "number: 999" }))
+      .element(page.getByRole("heading", { name: "number: 1000" }), {
+        timeout: 1000,
+      })
       .toBeVisible();
+
+    console.log("After Click and Fetch:");
+    console.log(document.body.outerHTML);
   });
 });
