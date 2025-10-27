@@ -2,7 +2,8 @@ import { beforeEach, afterEach, expect, test, describe, vi } from "vitest";
 import { page, userEvent } from "vitest/browser";
 import { render } from "vitest-browser-react";
 // import App from "./App.tsx";
-import App from "./AppMaterialUI.tsx";
+// import App from "./AppMaterialUI.tsx";
+import App from "./AppRadixUI.tsx";
 
 describe("App Component", () => {
   const originalFetch = window.fetch;
