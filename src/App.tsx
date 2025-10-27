@@ -18,6 +18,7 @@ function App() {
           const response = await fetch(
             `https://jsonplaceholder.typicode.com/todos/${randomID}`
           );
+          // await fetch(`https://jsonplaceholder.typicode.com/todos/${randomID}`);
           const data = await response.json();
           setNumber(data.id);
           setLoading(false);
