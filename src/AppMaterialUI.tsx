@@ -1,4 +1,11 @@
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
+
 import { useState } from "react";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 
 function App() {
   const [number, setNumber] = useState(0);
@@ -6,8 +13,8 @@ function App() {
 
   return (
     <>
-      <h3>Number: {number}</h3>
-      <button
+      <Typography variant="h3">Number: {number}</Typography>
+      <Button
         disabled={loading}
         onClick={async () => {
           setLoading(true);
@@ -21,7 +28,7 @@ function App() {
         }}
       >
         {loading ? "Loading..." : "Randomize number"}
-      </button>
+      </Button>
     </>
   );
 }
