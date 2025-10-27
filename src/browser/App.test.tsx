@@ -1,18 +1,19 @@
 import { beforeEach, afterEach, expect, test, describe, vi } from "vitest";
 import { page, userEvent } from "vitest/browser";
 import { render } from "vitest-browser-react";
-// import App from "./App.tsx";
-// import App from "./AppMaterialUI.tsx";
-import App from "./AppRadixUI.tsx";
+
+import App from "../App.tsx";
+// import App from "../AppMaterialUI.tsx";
+// import App from "../AppRadixUI.tsx";
 
 describe("App Component", () => {
   const originalFetch = window.fetch;
 
   beforeEach(() => {
     // @ts-ignore
-    window.fetch = vi.fn(async (...arg) => {
-      // Wait for 250ms to simulate network delay
-      await new Promise((resolve) => setTimeout(resolve, 250));
+    vi.spyOn(window, "fetch").mockImplementation(async (...arg) => {
+      // Wait for 100ms to simulate network delay
+      await new Promise((resolve) => setTimeout(resolve, 100));
       return Promise.resolve({
         json: () => Promise.resolve({ id: 1000 }),
       });
