@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { sleep } from "./utils";
 
 function App() {
   const [number, setNumber] = useState(0);
@@ -12,8 +13,10 @@ function App() {
         onClick={async () => {
           setLoading(true);
           const randomID = Math.floor(Math.random() * 200) + 1;
+          // Sleep for 500ms to simulate network delay
+          await sleep(500);
           const response = await fetch(
-            `https://jsonplaceholder.typicode.com/todos/${randomID}`,
+            `https://jsonplaceholder.typicode.com/todos/${randomID}`
           );
           const data = await response.json();
           setNumber(data.id);

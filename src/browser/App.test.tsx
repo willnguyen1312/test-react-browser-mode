@@ -39,7 +39,7 @@ describe("App Component", () => {
 
     // Act
     await userEvent.click(
-      page.getByRole("button", { name: "Randomize number" }),
+      page.getByRole("button", { name: "Randomize number" })
     );
     // Assert
     await expect
