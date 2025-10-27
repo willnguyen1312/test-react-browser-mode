@@ -37,19 +37,19 @@ describe("App Component", () => {
     expect(screen.getByRole("heading", { name: /number: 0/i })).toBeVisible();
 
     // Act
-    userEvent.click(
+    await user.click(
       screen.getByRole("button", {
         name: /randomize number/i,
-      }),
+      })
     );
 
     // Assert
     expect(
-      await screen.findByRole("button", { name: /Loading.../i }),
+      await screen.findByRole("button", { name: /Loading.../i })
     ).toBeDisabled();
 
     expect(
-      await screen.findByRole("heading", { name: /number: 1000/i }),
+      await screen.findByRole("heading", { name: /number: 1000/i })
     ).toBeVisible();
 
     console.log("After Click and Fetch:");
