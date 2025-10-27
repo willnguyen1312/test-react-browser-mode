@@ -30,9 +30,6 @@ describe("App Component", () => {
     render(<App />);
     const user = userEvent.setup();
 
-    console.log("Initial Render:");
-    console.log(document.body.outerHTML);
-
     // Assert
     expect(screen.getByRole("heading", { name: /number: 0/i })).toBeVisible();
 
@@ -51,8 +48,5 @@ describe("App Component", () => {
     expect(
       await screen.findByRole("heading", { name: /number: 1000/i })
     ).toBeVisible();
-
-    console.log("After Click and Fetch:");
-    console.log(document.body.outerHTML);
   });
 });

@@ -3,8 +3,8 @@ import { page, userEvent } from "vitest/browser";
 import { render } from "vitest-browser-react";
 
 // import App from "../App.tsx";
-import App from "../AppMaterialUI.tsx";
-// import App from "../AppRadixUI.tsx";
+// import App from "../AppMaterialUI.tsx";
+import App from "../AppRadixUI.tsx";
 
 describe("App Component", () => {
   const originalFetch = window.fetch;
@@ -25,12 +25,8 @@ describe("App Component", () => {
   });
 
   test("renders name", async () => {
-    vi.useFakeTimers();
     // Arrange
     await render(<App />);
-
-    console.log("Initial Render:");
-    console.log(document.body.outerHTML);
 
     // Assert
     await expect
@@ -45,14 +41,8 @@ describe("App Component", () => {
     await expect
       .element(page.getByRole("button", { name: "Loading..." }))
       .toBeDisabled();
-    await vi.runAllTimersAsync();
     await expect
-      .element(page.getByRole("heading", { name: "number: 1000" }), {
-        timeout: 1000,
-      })
+      .element(page.getByRole("heading", { name: "number: 1000" }))
       .toBeVisible();
-
-    console.log("After Click and Fetch:");
-    console.log(document.body.outerHTML);
   });
 });
