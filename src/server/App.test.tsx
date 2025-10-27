@@ -3,8 +3,8 @@ import "vitest-dom/extend-expect";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import App from "../App.tsx";
-// import App from "../AppMaterialUI.tsx";
+// import App from "../App.tsx";
+import App from "../AppMaterialUI.tsx";
 // import App from "../AppRadixUI.tsx";
 
 describe("App Component", () => {
@@ -40,16 +40,16 @@ describe("App Component", () => {
     userEvent.click(
       screen.getByRole("button", {
         name: /randomize number/i,
-      })
+      }),
     );
 
     // Assert
     expect(
-      await screen.findByRole("button", { name: /Loading.../i })
+      await screen.findByRole("button", { name: /Loading.../i }),
     ).toBeDisabled();
 
     expect(
-      await screen.findByRole("heading", { name: /number: 1000/i })
+      await screen.findByRole("heading", { name: /number: 1000/i }),
     ).toBeVisible();
 
     console.log("After Click and Fetch:");
