@@ -24,7 +24,7 @@ function App() {
           // Sleep for 500ms to simulate network delay
           await sleep(500);
           const response = await fetch(
-            `https://jsonplaceholder.typicode.com/todos/${randomID}`
+            `https://jsonplaceholder.typicode.com/todos/${randomID}`,
           );
           const data = await response.json();
           setNumber(data.id);

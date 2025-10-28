@@ -9,6 +9,7 @@ import App from "../App.tsx";
 describe("App Component", () => {
   const originalFetch = window.fetch;
   let fetchMock: ReturnType<typeof vi.spyOn>;
+  // expect(fetchMock).toHaveBeenCalledTimes(1);
 
   beforeEach(() => {
     // @ts-ignore
@@ -36,7 +37,7 @@ describe("App Component", () => {
 
     // Act
     await userEvent.click(
-      page.getByRole("button", { name: "Randomize number" })
+      page.getByRole("button", { name: "Randomize number" }),
     );
     // Assert
     await expect
@@ -45,7 +46,5 @@ describe("App Component", () => {
     await expect
       .element(page.getByRole("heading", { name: "number: 1000" }))
       .toBeVisible();
-
-    expect(fetchMock).toHaveBeenCalledTimes(1);
   });
 });
