@@ -1,4 +1,4 @@
-import { beforeEach, afterEach, expect, test, describe, vi } from "vitest";
+import { beforeEach, afterEach, expect, it, describe, vi } from "vitest";
 import { page, userEvent } from "vitest/browser";
 import { render } from "vitest-browser-react";
 
@@ -25,7 +25,7 @@ describe("App Component", () => {
     window.fetch = originalFetch;
   });
 
-  test("works", async () => {
+  it("generates a random number on button click", async () => {
     // Arrange
     await render(<App />);
 

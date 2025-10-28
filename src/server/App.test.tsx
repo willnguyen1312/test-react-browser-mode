@@ -9,6 +9,7 @@ import App from "../App.tsx";
 
 describe("App Component", () => {
   const originalFetch = window.fetch;
+  const user = userEvent.setup();
   let fetchMock: ReturnType<typeof vi.spyOn>;
 
   beforeEach(() => {
@@ -26,10 +27,9 @@ describe("App Component", () => {
     window.fetch = originalFetch;
   });
 
-  test("works", async () => {
+  test("generates a random number on button click", async () => {
     // Arrange
     render(<App />);
-    const user = userEvent.setup();
 
     // Assert
     expect(screen.getByRole("heading", { name: /number: 0/i })).toBeVisible();
