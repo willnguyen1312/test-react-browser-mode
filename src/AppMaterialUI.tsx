@@ -3,22 +3,42 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
-import { useState } from "react";
+import { useRef, useReducer } from "react";
+import { ref, watch } from "@vue/reactivity";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { sleep } from "./utils";
 
 function App() {
-  const [number, setNumber] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const [_, rerender] = useReducer((x) => x + 1, 0);
+  const stateRef = useRef<{
+    number: ReturnType<typeof ref<number>>;
+    loading: ReturnType<typeof ref<boolean>>;
+  } | null>(null);
+
+  if (!stateRef.current) {
+    stateRef.current = {
+      number: ref(0),
+      loading: ref(false),
+    };
+
+    watch(stateRef.current.number, () => rerender());
+    watch(stateRef.current.loading, () => rerender());
+  }
 
   return (
     <>
-      <Typography variant="h3">Number: {number}</Typography>
+      <Typography variant="h3">
+        Number: {stateRef.current?.number.value}
+      </Typography>
       <Button
-        disabled={loading}
+        disabled={stateRef.current?.loading.value}
         onClick={async () => {
-          setLoading(true);
+          if (!stateRef.current) {
+            return;
+          }
+
+          stateRef.current.loading.value = true;
           const randomID = Math.floor(Math.random() * 200) + 1;
           const response = await fetch(
             `https://jsonplaceholder.typicode.com/todos/${randomID}`
@@ -26,11 +46,14 @@ function App() {
           // Sleep for 500ms to simulate network delay
           await sleep(500);
           const data = await response.json();
-          setNumber(data.id);
-          setLoading(false);
+
+          if (stateRef.current) {
+            stateRef.current.number.value = data.id;
+            stateRef.current.loading.value = false;
+          }
         }}
       >
-        {loading ? "Loading..." : "Randomize number"}
+        {stateRef.current?.loading.value ? "Loading..." : "Randomize number"}
       </Button>
     </>
   );

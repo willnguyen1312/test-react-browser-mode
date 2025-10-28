@@ -1,17 +1,22 @@
-import { useState } from "react";
+import { useReducer } from "react";
 import { sleep } from "./utils";
 
+const state = {
+  number: 0,
+  loading: false,
+};
+
 function App() {
-  const [number, setNumber] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const [_, rerender] = useReducer((x) => x + 1, 0);
 
   return (
     <>
-      <h3>Number: {number}</h3>
+      <h3>Number: {state.number}</h3>
       <button
-        disabled={loading}
+        disabled={state.loading}
         onClick={async () => {
-          setLoading(true);
+          state.loading = true;
+          rerender();
           const randomID = Math.floor(Math.random() * 200) + 1;
           // Sleep for 500ms to simulate network delay
           await sleep(500);
@@ -20,11 +25,12 @@ function App() {
           );
           // await fetch(`https://jsonplaceholder.typicode.com/todos/${randomID}`);
           const data = await response.json();
-          setNumber(data.id);
-          setLoading(false);
+          state.number = data.id;
+          state.loading = false;
+          rerender();
         }}
       >
-        {loading ? "Loading..." : "Randomize number"}
+        {state.loading ? "Loading..." : "Randomize number"}
       </button>
     </>
   );

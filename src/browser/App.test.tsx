@@ -25,7 +25,7 @@ describe("App Component", () => {
     window.fetch = originalFetch;
   });
 
-  test("renders name", async () => {
+  test("works", async () => {
     // Arrange
     await render(<App />);
 
