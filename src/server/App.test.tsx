@@ -16,8 +16,6 @@ describe("App Component", () => {
   beforeEach(() => {
     // @ts-ignore
     fetchMock = vi.spyOn(window, "fetch").mockImplementation(async (...arg) => {
-      // Wait for 100ms to simulate network delay
-      await new Promise((resolve) => setTimeout(resolve, 100));
       return Promise.resolve({
         json: () => Promise.resolve({ id: 1000 }),
       });
@@ -39,16 +37,16 @@ describe("App Component", () => {
     await user.click(
       screen.getByRole("button", {
         name: /randomize number/i,
-      }),
+      })
     );
 
     // Assert
     expect(
-      await screen.findByRole("button", { name: /Loading.../i }),
+      await screen.findByRole("button", { name: /Loading.../i })
     ).toBeDisabled();
 
     expect(
-      await screen.findByRole("heading", { name: /number: 1000/i }),
+      await screen.findByRole("heading", { name: /number: 1000/i })
     ).toBeVisible();
   });
 });
