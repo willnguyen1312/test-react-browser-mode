@@ -15,7 +15,7 @@ describe("App Component", () => {
     // @ts-ignore
     fetchMock = vi.spyOn(window, "fetch").mockImplementation(async (...arg) => {
       // Wait for 100ms to simulate network delay
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 100));
       return Promise.resolve({
         json: () => Promise.resolve({ id: 1000 }),
       });
@@ -26,9 +26,10 @@ describe("App Component", () => {
     window.fetch = originalFetch;
   });
 
+  const renderApp = () => render(<App />);
   it("generates a random number on button click", async () => {
     // Arrange
-    await render(<App />);
+    await renderApp();
 
     // Assert
     await expect
@@ -37,7 +38,7 @@ describe("App Component", () => {
 
     // Act
     await userEvent.click(
-      page.getByRole("button", { name: "Randomize number" }),
+      page.getByRole("button", { name: "Randomize number" })
     );
     // Assert
     await expect

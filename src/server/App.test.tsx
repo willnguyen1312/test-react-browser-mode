@@ -26,9 +26,11 @@ describe("App Component", () => {
     window.fetch = originalFetch;
   });
 
+  const renderApp = () => render(<App />);
+
   test("generates a random number on button click", async () => {
     // Arrange
-    render(<App />);
+    renderApp();
 
     // Assert
     expect(screen.getByRole("heading", { name: /number: 0/i })).toBeVisible();
