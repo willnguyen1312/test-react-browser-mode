@@ -1,6 +1,9 @@
+// @ts-ignore
+import VueApp from "../App.vue";
 import { beforeEach, afterEach, expect, test, vi } from "vitest";
 import "vitest-dom/extend-expect";
 import { render, screen } from "@testing-library/react";
+import { render as renderVue } from "@testing-library/vue";
 import userEvent from "@testing-library/user-event";
 
 import App from "../App.tsx";
@@ -25,28 +28,28 @@ afterEach(() => {
   window.fetch = originalFetch;
 });
 
-const renderApp = () => render(<App />);
+const renderAppWithReact = () => render(<App />);
+const renderAppWithVue = () => renderVue(VueApp);
 
 test("App generates a random number on button click", async () => {
   // Arrange
-  renderApp();
+  // renderAppWithVue();
+  renderAppWithReact();
 
   // Assert
-  expect(screen.getByRole("heading", { name: /number: 0/i })).toBeVisible();
+  expect(screen.getByRole("heading", { name: "Number: 0" })).toBeVisible();
 
   // Act
   await user.click(
     screen.getByRole("button", {
-      name: /randomize number/i,
-    }),
+      name: "Randomize number",
+    })
   );
 
   // Assert
-  expect(
-    await screen.findByRole("button", { name: /Loading.../i }),
-  ).toBeDisabled();
+  expect(screen.getByRole("button", { name: "Loading..." })).toBeDisabled();
 
   expect(
-    await screen.findByRole("heading", { name: /number: 1000/i }),
+    await screen.findByRole("heading", { name: "Number: 1000" })
   ).toBeVisible();
 });
