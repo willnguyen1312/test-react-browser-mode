@@ -6,9 +6,9 @@ import { render, screen } from "@testing-library/react";
 import { render as renderVue } from "@testing-library/vue";
 import userEvent from "@testing-library/user-event";
 
-import App from "../App.tsx";
+// import App from "../App.tsx";
 // import App from "../AppMaterialUI.tsx";
-// import App from "../AppRadixUI.tsx";
+import App from "../AppRadixUI.tsx";
 
 const originalFetch = window.fetch;
 const user = userEvent.setup();

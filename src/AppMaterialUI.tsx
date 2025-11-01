@@ -41,10 +41,10 @@ function App() {
           stateRef.current.loading.value = true;
           const randomID = Math.floor(Math.random() * 200) + 1;
           const response = await fetch(
-            `https://jsonplaceholder.typicode.com/todos/${randomID}`,
+            `https://jsonplaceholder.typicode.com/todos/${randomID}`
           );
-          // Sleep for 500ms to simulate network delay
-          await sleep(500);
+          // Sleep for 100ms to simulate network delay
+          await sleep(100);
           const data = await response.json();
 
           if (stateRef.current) {
