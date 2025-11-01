@@ -2,7 +2,7 @@
 import VueApp from "../App.vue";
 import { beforeEach, afterEach, expect, test, vi } from "vitest";
 import "vitest-dom/extend-expect";
-import { render, screen } from "@testing-library/react";
+import { render as renderReact, screen } from "@testing-library/react";
 import { render as renderVue } from "@testing-library/vue";
 import userEvent from "@testing-library/user-event";
 
@@ -30,7 +30,7 @@ afterEach(() => {
   window.fetch = originalFetch;
 });
 
-const renderReactApp = () => render(<ReactApp />);
+const renderReactApp = () => renderReact(<ReactApp />);
 
 test("App generates a random number on button click", async () => {
   // Arrange
