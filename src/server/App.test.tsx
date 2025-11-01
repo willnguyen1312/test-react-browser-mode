@@ -33,21 +33,14 @@ afterEach(() => {
 const renderReactApp = () => renderReact(<ReactApp />);
 
 test("App generates a random number on button click", async () => {
-  // Arrange
-  renderReactApp();
-  // renderVueApp();
-
-  // Assert
   expect(screen.getByRole("heading", { name: "Number: 0" })).toBeVisible();
 
-  // Act
   await user.click(
     screen.getByRole("button", {
       name: "Randomize number",
     })
   );
 
-  // Assert
   expect(screen.getByRole("button", { name: "Loading..." })).toBeDisabled();
 
   expect(
