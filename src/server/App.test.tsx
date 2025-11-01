@@ -34,7 +34,8 @@ const renderReactApp = () => renderReact(<ReactApp />);
 
 test("App generates a random number on button click", async () => {
   // Arrange
-  renderReactApp();
+  // renderReactApp();
+  renderVueApp();
 
   // Assert
   expect(screen.getByRole("heading", { name: "Number: 0" })).toBeVisible();
@@ -52,4 +53,8 @@ test("App generates a random number on button click", async () => {
   expect(
     await screen.findByRole("heading", { name: "Number: 1000" })
   ).toBeVisible();
+
+  expect(
+    screen.queryByRole("button", { name: "Loading..." })
+  ).not.toBeInTheDocument();
 });
