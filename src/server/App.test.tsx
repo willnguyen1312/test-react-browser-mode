@@ -6,9 +6,9 @@ import { render, screen } from "@testing-library/react";
 import { render as renderVue } from "@testing-library/vue";
 import userEvent from "@testing-library/user-event";
 
-// import App from "../App.tsx";
-// import App from "../AppMaterialUI.tsx";
-import App from "../AppRadixUI.tsx";
+import ReactApp from "../App.tsx";
+// import ReactApp from "../AppMaterialUI.tsx";
+// import ReactApp from "../AppRadixUI.tsx";
 
 const originalFetch = window.fetch;
 const user = userEvent.setup();
@@ -29,7 +29,7 @@ afterEach(() => {
   window.fetch = originalFetch;
 });
 
-const renderAppWithReact = () => render(<App />);
+const renderAppWithReact = () => render(<ReactApp />);
 
 test("App generates a random number on button click", async () => {
   // Arrange
