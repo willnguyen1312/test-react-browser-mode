@@ -15,6 +15,7 @@ const user = userEvent.setup();
 let fetchMock: ReturnType<typeof vi.spyOn>;
 // expect(fetchMock).toHaveBeenCalledTimes(1);
 
+const renderAppWithVue = () => renderVue(VueApp);
 beforeEach(() => {
   // @ts-ignore
   fetchMock = vi.spyOn(window, "fetch").mockImplementation(async (...arg) => {
@@ -29,7 +30,6 @@ afterEach(() => {
 });
 
 const renderAppWithReact = () => render(<App />);
-const renderAppWithVue = () => renderVue(VueApp);
 
 test("App generates a random number on button click", async () => {
   // Arrange
