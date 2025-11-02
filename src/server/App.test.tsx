@@ -1,5 +1,6 @@
 // @ts-ignore
 import VueApp from "../App.vue";
+import { renderVanillaApp } from "../App.ts";
 import { beforeEach, afterEach, expect, test, vi } from "vitest";
 import "vitest-dom/extend-expect";
 import { render as renderReact, screen } from "@testing-library/react";
