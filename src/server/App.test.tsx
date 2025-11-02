@@ -1,22 +1,18 @@
 // @ts-ignore
 import VueApp from "../App.vue";
-import { renderVanillaApp } from "../App.ts";
 import { beforeEach, afterEach, expect, test, vi } from "vitest";
 import "vitest-dom/extend-expect";
 import { render as renderReact, screen } from "@testing-library/react";
-import { render as renderVue } from "@testing-library/vue";
 import userEvent from "@testing-library/user-event";
 
 import ReactApp from "../App.tsx";
+import { sleep } from "../utils.ts";
 // import ReactApp from "../AppMaterialUI.tsx";
 // import ReactApp from "../AppRadixUI.tsx";
 
 const originalFetch = window.fetch;
 const user = userEvent.setup();
 let fetchMock: ReturnType<typeof vi.spyOn>;
-// expect(fetchMock).toHaveBeenCalledTimes(1);
-
-const renderVueApp = () => renderVue(VueApp);
 
 beforeEach(() => {
   // @ts-ignore
@@ -34,21 +30,15 @@ afterEach(() => {
 const renderReactApp = () => renderReact(<ReactApp />);
 
 test("App generates a random number on button click", async () => {
-  expect(screen.getByRole("heading", { name: "Number: 0" })).toBeVisible();
+  renderReactApp();
 
   await user.click(
     screen.getByRole("button", {
-      name: "Randomize number",
+      name: "Track event",
     })
   );
 
-  expect(screen.getByRole("button", { name: "Loading..." })).toBeDisabled();
-
-  expect(
-    await screen.findByRole("heading", { name: "Number: 1000" })
-  ).toBeVisible();
-
-  expect(
-    screen.queryByRole("button", { name: "Loading..." })
-  ).not.toBeInTheDocument();
+  // Wait some time to ensure no extra fetch calls are made
+  await sleep(1000);
+  expect(fetchMock).toHaveBeenCalledTimes(1);
 });

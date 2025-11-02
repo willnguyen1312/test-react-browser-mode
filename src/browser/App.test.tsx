@@ -13,7 +13,7 @@ let fetchMock: ReturnType<typeof vi.spyOn>;
 beforeEach(() => {
   // @ts-ignore
   fetchMock = vi.spyOn(window, "fetch").mockImplementation(async (...arg) => {
-    // Wait for 100ms to simulate network delay
+    // Wait for 10ms to simulate network delay
     await new Promise((resolve) => setTimeout(resolve, 100));
     return Promise.resolve({
       json: () => Promise.resolve({ id: 1000 }),
