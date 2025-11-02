@@ -17,6 +17,7 @@ let fetchMock: ReturnType<typeof vi.spyOn>;
 // expect(fetchMock).toHaveBeenCalledTimes(1);
 
 const renderVueApp = () => renderVue(VueApp);
+const renderReactApp = () => renderReact(<ReactApp />);
 
 beforeEach(() => {
   // @ts-ignore
@@ -30,8 +31,6 @@ beforeEach(() => {
 afterEach(() => {
   window.fetch = originalFetch;
 });
-
-const renderReactApp = () => renderReact(<ReactApp />);
 
 test("App generates a random number on button click", async () => {
   expect(screen.getByRole("heading", { name: "Number: 0" })).toBeVisible();
