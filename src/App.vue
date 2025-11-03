@@ -8,6 +8,12 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { sleep } from "./utils";
+
+const unneededCode = () => {
+  // This function is not used anywhere
+  console.log("This is unneeded code");
+};
+
 const number = ref(0);
 const isLoading = ref(false);
 const randomize = async () => {

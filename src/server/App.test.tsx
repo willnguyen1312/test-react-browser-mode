@@ -33,6 +33,7 @@ afterEach(() => {
 });
 
 test("App generates a random number on button click", async () => {
+  renderVueApp();
   expect(screen.getByRole("heading", { name: "Number: 0" })).toBeVisible();
 
   await user.click(
