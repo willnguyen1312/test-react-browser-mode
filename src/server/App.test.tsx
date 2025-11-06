@@ -32,8 +32,10 @@ afterEach(() => {
   window.fetch = originalFetch;
 });
 
+// Test driven development FTW 🚀
 test("App generates a random number on button click", async () => {
-  renderVueApp();
+  // TODO: Fulfill the DOM to meet all test criteria
+
   expect(screen.getByRole("heading", { name: "Number: 0" })).toBeVisible();
 
   await user.click(
@@ -44,6 +46,7 @@ test("App generates a random number on button click", async () => {
 
   expect(screen.getByRole("button", { name: "Loading..." })).toBeDisabled();
 
+  // Mocked fetch API to return 1000
   expect(
     await screen.findByRole("heading", { name: "Number: 1000" })
   ).toBeVisible();
@@ -51,4 +54,9 @@ test("App generates a random number on button click", async () => {
   expect(
     screen.queryByRole("button", { name: "Loading..." })
   ).not.toBeInTheDocument();
+  expect(
+    screen.getByRole("button", {
+      name: "Randomize number",
+    })
+  ).toBeEnabled();
 });
