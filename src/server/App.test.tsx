@@ -29,7 +29,7 @@ afterEach(() => {
 
 const renderReactApp = () => renderReact(<ReactApp />);
 
-test("App generates a random number on button click", async () => {
+test("App tracks event once on button click", async () => {
   renderReactApp();
 
   await user.click(

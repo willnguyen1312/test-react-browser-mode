@@ -14,7 +14,6 @@ function App() {
     };
 
     if (config) {
-      console.log("calling fetchData");
       fetchData();
     }
   }, [config]);
