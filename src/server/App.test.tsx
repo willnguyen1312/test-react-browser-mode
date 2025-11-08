@@ -35,7 +35,7 @@ afterEach(() => {
 // Test driven development FTW 🚀
 test("App generates a random number on button click", async () => {
   // TODO: Fulfill the DOM to meet all test criteria
-
+  renderVueApp();
   expect(screen.getByRole("heading", { name: "Number: 0" })).toBeVisible();
 
   await user.click(
